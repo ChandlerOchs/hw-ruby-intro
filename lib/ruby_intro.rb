@@ -58,8 +58,11 @@ end
 
 def starts_with_consonant? s
   # YOUR CODE HERE
-  # return s =~ /\A(?=[^aeiou])/(?=[a-z])/i
-  return false
+  if s.length() == 0
+    return false
+  end
+  return !(s =~ /^[aeiou]/i) && (s =~ /^[a-z]/i)
+  
 end
 
 def binary_multiple_of_4? s
@@ -79,4 +82,19 @@ end
 
 class BookInStock
 # YOUR CODE HERE
+  attr_reader :isbn, :price 
+  attr_writer :isbn, :price
+  def initialize(isbn, price)
+    # assign instance variables
+    if price <= 0 || isbn.length() == 0
+      raise ArgumentError, 'price <= 0 or isbn was the empty string'
+    end
+    @isbn = isbn
+    @price = price
+  end
+  
+  def price_as_string
+    return "$%.2f" % @price
+  end
+  
 end
